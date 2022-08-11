@@ -1,4 +1,4 @@
-package com.poo0054.base.SimpleAlgorithm;
+package 算法提升专题.基础算法.二分查找;
 
 import org.junit.Test;
 
@@ -10,7 +10,7 @@ import org.junit.Test;
  * @version 1.0
  * @since 2022/8/10 15:14
  */
-public class BinarySearchTest {
+public class 查找元素的第一个和最后一个位置 {
     /**
      * 在排序数组中查找元素的第一个和最后一个位置
      * 示例 1：
@@ -22,7 +22,7 @@ public class BinarySearchTest {
      * 输出：[-1,-1]
      */
     @Test
-    public void query() {
+    public void Test() {
         int[] nums = new int[]{1, 2};
         int target = 1;
         int[] ints = searchRange(nums, target);
@@ -56,11 +56,11 @@ public class BinarySearchTest {
         int l = 0, r = nums.length - 1;
         while (l < r) {
             //中间值
-            int min = (r + l) >> 1;
-            if (target <= nums[min]) {
-                r = min;
+            int mid = (r + l) >> 1;
+            if (target <= nums[mid]) {
+                r = mid;
             } else {
-                l = ++min;
+                l = ++mid;
             }
         }
         return r;
