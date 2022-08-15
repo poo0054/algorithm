@@ -17,8 +17,9 @@ public class 归并排序 {
 
     @Test
     public void Test() {
-        int[] nums = {-4, 0, 7, 4, 9, -5, -1, 0, -7, -1};
-        quickSortIterator(nums, 0, nums.length - 1);
+//        int[] nums = {-4, 0, 7, 4, 9, -5, -1, 0, -7, -1};
+        int[] nums = {0, 5, 1, 10, 2};
+        quickSortIteratorDesc(nums, 0, nums.length - 1);
         Arrays.stream(nums).forEach(System.out::println);
     }
 
@@ -26,7 +27,7 @@ public class 归并排序 {
     // ==============================从小到大
 
     //===============递归
-    private void quickSort(int[] nums, int left, int right) {
+    public void quickSort(int[] nums, int left, int right) {
         int l = left, r = right, mid = (left + right) >> 1;
         if (l < r) {
             //左边组
@@ -37,7 +38,7 @@ public class 归并排序 {
         }
     }
 
-    private void merge(int[] nums, int l, int mid, int r) {
+    public void merge(int[] nums, int l, int mid, int r) {
         //右边开始位置
         int rIndex = mid + 1;
         //临时数据
@@ -72,7 +73,7 @@ public class 归并排序 {
 
     //===============迭代器
 
-    private void quickSortIterator(int[] nums, int left, int right) {
+    public void quickSortIterator(int[] nums, int left, int right) {
         //步长 从1开始
         int k = 1;
         //等于或者大于就只有左边 没有右边  ——》 排序完成
@@ -83,7 +84,7 @@ public class 归并排序 {
         }
     }
 
-    private void mergeIterator(int[] nums, int left, int right, int k) {
+    public void mergeIterator(int[] nums, int left, int right, int k) {
         //先按照k一步步拆分
         int lStart, lEnd, rStart, rEnd;
         //循环当前所有元素
@@ -111,6 +112,7 @@ public class 归并排序 {
 
             //比较
             while (lStart <= lEnd && rStart <= rEnd) {
+                // TODO 如果需要从大到小 改为 >=就好了
                 //左边小
                 if (nums[lStart] <= nums[rStart]) {
                     ints[intsIndex++] = nums[lStart++];
@@ -138,7 +140,111 @@ public class 归并排序 {
 
         }
     }
-// ==============================从大到小
+
+    // ==============================从大到小
+
+    //===============递归
+    public void quickSortDesc(int[] nums, int left, int right) {
+        int l = left, r = right, mid = (r + l) >> 1;
+        if (left < right) {
+            quickSortDesc(nums, l, mid);
+            //向右边偏移  left < right 控制不越界
+            quickSortDesc(nums, mid + 1, r);
+            //这里有一个前提条件 left < right
+            mergeDesc(nums, l, mid, r);
+        }
+    }
+
+    private void mergeDesc(int[] nums, int l, int mid, int r) {
+        //左右俩组进行比较 上面使用的是 /2 如果0 1 向左偏移 这里使用 rStart = mid + 1  如果上面(r + l+1) >> 1; 这里需要使用 lEnd=mid -1
+        int lStart = l, lEnd = mid, rStart = mid + 1, rEnd = r;
+        // = 是因为最后一位也需要处理
+        int[] ints = new int[rEnd - lStart + 1];
+        int index = lStart;
+        int intsIndex = 0;
+
+        //比较
+        while (lStart <= lEnd && rStart <= rEnd) {
+            if (nums[lStart] >= nums[rStart]) {
+                //左边大
+                ints[intsIndex++] = nums[lStart++];
+            } else {
+                //右边大
+                ints[intsIndex++] = nums[rStart++];
+            }
+        }
+
+        //剩余的  按照顺序添加
+        while (lStart <= lEnd) {
+            ints[intsIndex++] = nums[lStart++];
+        }
+        while (rStart <= rEnd) {
+            ints[intsIndex++] = nums[rStart++];
+        }
+
+        //复制过去
+        for (int i = 0; i < ints.length; i++) {
+            nums[index++] = ints[i];
+        }
+    }
+
+    //===============迭代器
+    public void quickSortIteratorDesc(int[] nums, int left, int right) {
+        //先确认步长
+        int k = 1;
+        //保证最少要有一组
+        while (k <= right) {
+            mergeIteratorDesc(nums, left, right, k);
+            //步长的增长
+            k <<= 1;
+        }
+    }
+
+    public void mergeIteratorDesc(int[] nums, int left, int right, int k) {
+        //先按照k一步步拆分
+        int lStart, lEnd, rStart, rEnd;
+        //i 当前开始下标
+        for (int i = left; i < right; ) {
+            lStart = i;
+            //下一组开始的前一个  最长不能超过right
+            lEnd = Math.min(lStart + k - 1, right);
+            rStart = Math.min(lStart + k, right);
+            rEnd = Math.min(rStart + k - 1, right);
+            //只剩一组不进行比较  —————— 最后可能一组都不足了
+            if (lEnd >= right) {
+                return;
+            }
+            //下一组开始下标
+            i = rEnd + 1;
+
+            int[] ints = new int[rEnd - lStart + 1];
+            int index = lStart;
+            int intsIndex = 0;
+
+            while (lStart <= lEnd && rStart <= rEnd) {
+                if (nums[lStart] >= nums[rStart]) {
+                    ints[intsIndex++] = nums[lStart++];
+                } else {
+                    ints[intsIndex++] = nums[rStart++];
+                }
+            }
+
+            //剩余的  按照顺序添加
+            while (lStart <= lEnd) {
+                ints[intsIndex++] = nums[lStart++];
+            }
+            while (rStart <= rEnd) {
+                ints[intsIndex++] = nums[rStart++];
+            }
+
+            //复制过去
+            for (int i1 = 0; i1 < ints.length; i1++) {
+                nums[index++] = ints[i1];
+            }
+        }
+
+
+    }
 
 }
 

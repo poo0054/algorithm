@@ -19,7 +19,7 @@ public class 冒泡排序 {
 
     // ==============================从小到大
 
-    private void bubbleSort(int[] ints) {
+    public void bubbleSort(int[] ints) {
         for (int i = 0; i < ints.length - 1; i++) {
             boolean temple = true;
             for (int j = i + 1; j < ints.length; j++) {
