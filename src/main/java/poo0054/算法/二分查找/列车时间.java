@@ -1,4 +1,4 @@
-package poo0054.基础算法.二分查找;
+package poo0054.算法.二分查找;
 
 import org.junit.Test;
 

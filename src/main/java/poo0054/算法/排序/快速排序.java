@@ -1,4 +1,4 @@
-package poo0054.基础算法.排序;
+package poo0054.算法.排序;
 
 import org.junit.Test;
 
