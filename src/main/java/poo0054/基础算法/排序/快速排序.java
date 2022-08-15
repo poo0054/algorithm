@@ -14,14 +14,14 @@ import java.util.Arrays;
 public class 快速排序 {
     @Test
     public void Test() {
-        int[] nums = {1, 2, 0, 0};
-        quickSort(nums, 0, nums.length - 1);
+        int[] nums = {6, 5, 3, 2, 9, 5, 9, 11, 1, 3};
+        quickSortDesc(nums, 0, nums.length - 1);
         Arrays.stream(nums).forEach(System.out::println);
     }
 
     //==========================从小到大
 
-    private void quickSort(int[] nums, int left, int right) {
+    public void quickSort(int[] nums, int left, int right) {
         if (left >= right) {
             return;
         }
@@ -52,6 +52,34 @@ public class 快速排序 {
 
     //==========================从大到小
 
-
+    public void quickSortDesc(int[] nums, int left, int right) {
+        if (left >= right) {
+            return;
+        }
+        //中间值
+        int mid = (left + right) >> 1;
+        int l = left;
+        int r = right;
+        int baseValue = nums[mid];
+        exchange(nums, r, mid);
+        //循环所有数
+        while (l < r) {
+            //大的放左边 小的放右边
+            while (nums[l] >= baseValue && l < r) {
+                l++;
+            }
+            while (nums[r] <= baseValue && l < r) {
+                r--;
+            }
+            //交换数据
+            if (l < r) {
+                exchange(nums, r, l);
+            }
+        }
+        //把baseValue放到 下标l位置 左边就比base大  右边小
+        exchange(nums, l, right);
+        quickSortDesc(nums, left, l - 1);
+        quickSortDesc(nums, r + 1, right);
+    }
 }
 
