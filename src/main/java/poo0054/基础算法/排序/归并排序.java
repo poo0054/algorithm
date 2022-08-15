@@ -17,8 +17,8 @@ public class 归并排序 {
 
     @Test
     public void Test() {
-        int[] nums = {1, 2, 0, 0, 3, 5};
-        quickSortDesc(nums, 0, nums.length - 1);
+        int[] nums = {-4, 0, 7, 4, 9, -5, -1, 0, -7, -1};
+        quickSortIterator(nums, 0, nums.length - 1);
         Arrays.stream(nums).forEach(System.out::println);
     }
 
@@ -72,38 +72,75 @@ public class 归并排序 {
 
     //===============迭代器
 
-    private void quickSortDesc(int[] nums, int left, int right) {
+    private void quickSortIterator(int[] nums, int left, int right) {
         //步长 从1开始
         int k = 1;
         //等于或者大于就只有左边 没有右边  ——》 排序完成
-        while (k < right) {
-            mergeDesc(nums, left, right, k);
-            //步长每次*2
+        while (k <= right) {
+            mergeIterator(nums, left, right, k);
+            //步长每次 * 2
             k = k << 1;
         }
     }
 
-    private void mergeDesc(int[] nums, int left, int right, int k) {
+    private void mergeIterator(int[] nums, int left, int right, int k) {
         //先按照k一步步拆分
-
-        int lLeft, lRight, rLeft, rRight;
+        int lStart, lEnd, rStart, rEnd;
         //循环当前所有元素
-        for (int i = left; i <= right; ) {
-            //第一组和第二组比较 以此类推
+        for (int i = left; i < right; ) {
+            //第一组和第二组比较 以此类推 k<right  步长最长比长度 -1
             //第一组开始
-            lLeft = i;
-            //第二组开始
-            rLeft = i + k;
+            lStart = i;
             //第一组结束
-            lRight = rLeft - 1;
-            //第二组结束  第三组开始的后面一位
-            rRight = lRight + k - 1;
-            //TODO
+            lEnd = i + k - 1;
+            //只有一组了  直接返回
+            if (lEnd >= right) {
+                return;
+            }
+            //第二组开始 最长限制
+            rStart = Math.min(lEnd + 1, right);
+            //第二组结束  第三组开始 -1  最长限制
+            rEnd = Math.min(rStart + k - 1, right);
+
+            //当前操作开始下标
+            int index = lStart;
+
+            //当前容器最大长度  都是使用下标进行操作  需要加一
+            int[] ints = new int[rEnd - lStart + 1];
+            int intsIndex = 0;
+
+            //比较
+            while (lStart <= lEnd && rStart <= rEnd) {
+                //左边小
+                if (nums[lStart] <= nums[rStart]) {
+                    ints[intsIndex++] = nums[lStart++];
+                } else {
+                    //右边小
+                    ints[intsIndex++] = nums[rStart++];
+                }
+            }
+
+            //剩余的直接添加
+            while (lStart <= lEnd) {
+                ints[intsIndex++] = nums[lStart++];
+            }
+            while (rStart <= rEnd) {
+                ints[intsIndex++] = nums[rStart++];
+            }
+
+            //把排序好的直接添加入数组
+            for (int i1 = 0; i1 < ints.length; i1++) {
+                nums[index++] = ints[i1];
+            }
+
+            //下一组开始位置
+            i = rEnd + 1;
+
         }
-
     }
-
-
-    // ==============================从大到小
+// ==============================从大到小
 
 }
+
+
+
