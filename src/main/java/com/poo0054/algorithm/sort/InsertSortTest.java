@@ -1,4 +1,4 @@
-package poo0054.算法.排序;
+package com.poo0054.algorithm.sort;
 
 import org.junit.Test;
 
@@ -12,7 +12,7 @@ import java.util.Arrays;
  * @version 1.0
  * @since 2022/8/15 14:14
  */
-public class 插入排序 {
+public class InsertSortTest {
 
     @Test
     public void Test() {

@@ -1,4 +1,4 @@
-package poo0054.算法.排序;
+package com.poo0054.algorithm.sort;
 
 import org.junit.Test;
 
@@ -11,7 +11,7 @@ import java.util.Arrays;
  * @version 1.0
  * @since 2022/8/12 10:33
  */
-public class 快速排序 {
+public class QuickSortTest {
     @Test
     public void Test() {
         int[] nums = {6, 5, 3, 2, 9, 5, 9, 11, 1, 3};

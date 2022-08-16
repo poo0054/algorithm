@@ -1,4 +1,4 @@
-package poo0054.算法.排序;
+package com.poo0054.algorithm.sort;
 
 import org.junit.Test;
 
@@ -9,12 +9,12 @@ import java.util.Arrays;
  * @version 1.0
  * @since 2022/8/12 10:14
  */
-public class 冒泡排序 {
+public class BubbleSortTest {
     @Test
     public void Test() {
-        int[] ints = {10, 9, 8, 7, 6, 5, 11, 12};
-        bubbleSortDesc(ints);
-        Arrays.stream(ints).forEach(System.out::println);
+        int[] nums = {10, 9, 8, 7, 6, 5, 11, 12};
+        bubbleSortDesc(nums);
+        Arrays.stream(nums).forEach(System.out::println);
     }
 
     // ==============================从小到大

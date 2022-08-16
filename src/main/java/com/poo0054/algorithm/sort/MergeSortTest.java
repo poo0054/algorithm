@@ -1,4 +1,4 @@
-package poo0054.算法.排序;
+package com.poo0054.algorithm.sort;
 
 import org.junit.Test;
 
@@ -13,13 +13,13 @@ import java.util.Arrays;
  * @version 1.0
  * @since 2022/8/12 16:33
  */
-public class 归并排序 {
+public class MergeSortTest {
 
     @Test
     public void Test() {
 //        int[] nums = {-4, 0, 7, 4, 9, -5, -1, 0, -7, -1};
         int[] nums = {0, 5, 1, 10, 2};
-        quickSortIteratorDesc(nums, 0, nums.length - 1);
+        mergeSortIteratorDesc(nums, 0, nums.length - 1);
         Arrays.stream(nums).forEach(System.out::println);
     }
 
@@ -27,13 +27,13 @@ public class 归并排序 {
     // ==============================从小到大
 
     //===============递归
-    public void quickSort(int[] nums, int left, int right) {
+    public void mergeSort(int[] nums, int left, int right) {
         int l = left, r = right, mid = (left + right) >> 1;
         if (l < r) {
             //左边组
-            quickSort(nums, l, mid);
+            mergeSort(nums, l, mid);
             //右边组
-            quickSort(nums, mid + 1, r);
+            mergeSort(nums, mid + 1, r);
             merge(nums, l, mid, r);
         }
     }
@@ -73,7 +73,7 @@ public class 归并排序 {
 
     //===============迭代器
 
-    public void quickSortIterator(int[] nums, int left, int right) {
+    public void mergeSortIterator(int[] nums, int left, int right) {
         //步长 从1开始
         int k = 1;
         //等于或者大于就只有左边 没有右边  ——》 排序完成
@@ -144,12 +144,12 @@ public class 归并排序 {
     // ==============================从大到小
 
     //===============递归
-    public void quickSortDesc(int[] nums, int left, int right) {
+    public void mergeSortDesc(int[] nums, int left, int right) {
         int l = left, r = right, mid = (r + l) >> 1;
         if (left < right) {
-            quickSortDesc(nums, l, mid);
+            mergeSortDesc(nums, l, mid);
             //向右边偏移  left < right 控制不越界
-            quickSortDesc(nums, mid + 1, r);
+            mergeSortDesc(nums, mid + 1, r);
             //这里有一个前提条件 left < right
             mergeDesc(nums, l, mid, r);
         }
@@ -189,7 +189,7 @@ public class 归并排序 {
     }
 
     //===============迭代器
-    public void quickSortIteratorDesc(int[] nums, int left, int right) {
+    public void mergeSortIteratorDesc(int[] nums, int left, int right) {
         //先确认步长
         int k = 1;
         //保证最少要有一组

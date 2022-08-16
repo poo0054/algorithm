@@ -1,4 +1,4 @@
-package poo0054.算法.二分查找;
+package com.poo0054.algorithm.BinarySearch;
 
 import org.junit.Test;
 
