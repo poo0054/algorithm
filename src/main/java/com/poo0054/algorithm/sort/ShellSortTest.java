@@ -28,6 +28,11 @@ public class ShellSortTest {
 
     //=============================================升序
 
+    /**
+     * 核心原理每次分组进行插入排序 最后步长为1的时候每一个数字都进行插入排序
+     *
+     * @param nums 需要排序的数组
+     */
     private void shellSort(int[] nums) {
         //第一次分组 步长
         int gap = nums.length >> 1;
@@ -45,9 +50,9 @@ public class ShellSortTest {
                     if (nums[startIndex] > nums[endIndex]) {
                         //替换
                         exchange(nums, startIndex, endIndex);
-                        //找前面步长的数据来替换
+                        //已经替换了
                         endIndex = startIndex;
-                        //下一组开始下标
+                        //找上一个元素继续进行比较
                         startIndex = endIndex - gap;
                     } else {
                         break;
