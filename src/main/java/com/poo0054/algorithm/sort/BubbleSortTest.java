@@ -60,9 +60,9 @@ public class BubbleSortTest {
     /**
      * 替换
      */
-    public static void exchange(int[] ints, int i, int j) {
-        int temple = ints[j];
-        ints[j] = ints[i];
-        ints[i] = temple;
+    public static void exchange(int[] nums, int i, int j) {
+        int temple = nums[j];
+        nums[j] = nums[i];
+        nums[i] = temple;
     }
 }
