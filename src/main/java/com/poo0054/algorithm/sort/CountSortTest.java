@@ -13,7 +13,7 @@ import java.util.Arrays;
  * @version 1.0
  * @since 2022/8/16 16:20
  */
-public class CountSort {
+public class CountSortTest {
 
 
     @Test
