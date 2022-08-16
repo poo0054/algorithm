@@ -5,6 +5,8 @@ import org.junit.Test;
 import java.util.Arrays;
 
 /**
+ * 希尔排序
+ * <p>
  * 是插入排序的一种更高效的改进版本
  * <p>
  * 先选定一个整数gap，把待排序文件中所有记录分成gap个组，所有距离为gap的记录分在同一组内，并对每一组内的元素进行排序。

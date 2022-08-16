@@ -5,6 +5,8 @@ import org.junit.Test;
 import java.util.Arrays;
 
 /**
+ * 快速排序
+ * <p>
  * 先从数列中取出一个数作为基准数进行排序
  *
  * @author ZhangZhi
