@@ -15,7 +15,7 @@ import java.util.Arrays;
  * @version 1.0
  * @since 2022/8/15 18:04
  */
-public class selectSortTest {
+public class SelectSortTest {
     @Test
     public void Test() {
         int[] nums = {5, 2, 3, 1};

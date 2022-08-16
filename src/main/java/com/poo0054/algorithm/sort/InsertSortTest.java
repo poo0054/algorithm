@@ -23,13 +23,6 @@ public class InsertSortTest {
         Arrays.stream(nums).forEach(System.out::println);
     }
 
-
-    public static void exchange(int[] nums, int i, int j) {
-        int temple = nums[j];
-        nums[j] = nums[i];
-        nums[i] = temple;
-    }
-
     //============================================升序
 
     public void insertSort(int[] nums) {
@@ -49,4 +42,10 @@ public class InsertSortTest {
         }
     }
 
+    public static void exchange(int[] nums, int i, int j) {
+        int temple = nums[j];
+        nums[j] = nums[i];
+        nums[i] = temple;
+    }
+    
 }

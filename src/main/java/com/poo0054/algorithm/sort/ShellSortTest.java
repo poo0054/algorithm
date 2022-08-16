@@ -61,12 +61,6 @@ public class ShellSortTest {
     }
 
 
-    public static void exchange(int[] nums, int i, int j) {
-        int temple = nums[j];
-        nums[j] = nums[i];
-        nums[i] = temple;
-    }
-
     //============================================降序
 
 
@@ -97,6 +91,12 @@ public class ShellSortTest {
             gap >>= 1;
             shellSortDesc(nums, gap);
         }
+    }
+
+    public static void exchange(int[] nums, int i, int j) {
+        int temple = nums[j];
+        nums[j] = nums[i];
+        nums[i] = temple;
     }
 
 }
