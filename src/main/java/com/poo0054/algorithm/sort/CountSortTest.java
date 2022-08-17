@@ -14,11 +14,9 @@ import java.util.Arrays;
  * @since 2022/8/16 16:20
  */
 public class CountSortTest {
-
-
     @Test
     public void Test() {
-        int[] nums = {10};
+        int[] nums = {10, -9, -10, -5, -1, -9};
         countSort(nums);
         Arrays.stream(nums).forEach(System.out::println);
     }
@@ -26,16 +24,28 @@ public class CountSortTest {
     public void countSort(int[] nums) {
         int length = nums.length - 1;
         //获取最大值
-        int max = getMaxValue(nums);
-        //找到一个数组
-        int[] ints = new int[max + 1];
+        int max = 0;
+        int min = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > max) {
+                max = nums[i];
+            }
+            if (nums[i] < min) {
+                min = nums[i];
+            }
+        }
+
+        //存放所有数据的数组
+        int[] ints = new int[(max - min) + 1];
 
         for (int i = 0; i <= length; i++) {
             //当前值
             int num = nums[i];
+            num -= min;
             //下标为值的数字加一
             ints[num] += 1;
         }
+
         int i = 0;
         for (int j = 0; j <= length; j++) {
             //如果是0就跳过
@@ -43,20 +53,11 @@ public class CountSortTest {
                 i++;
             }
             //nums的值为下标
-            nums[j] = i;
+            nums[j] = i + min;
             //使用过了 就减去
             ints[i]--;
         }
     }
 
-    private int getMaxValue(int[] nums) {
-        int temp = 0;
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] > temp) {
-                temp = nums[i];
-            }
-        }
-        return temp;
-    }
 
 }
