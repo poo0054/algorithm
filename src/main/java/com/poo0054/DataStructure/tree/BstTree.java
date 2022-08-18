@@ -356,12 +356,11 @@ public class BstTree {
             }
             //右边
             parentNode.setRight(changeNode);
-            return true;
         } else {
             //替换为根节点
             this.treeNode = changeNode;
-            return true;
         }
+        return true;
     }
 
 
