@@ -11,6 +11,7 @@ import lombok.Data;
 public class TreeNode {
     private int data;
     private TreeNode left, right;
+    private int height;
 
     public TreeNode(int data) {
         this.data = data;
@@ -21,5 +22,12 @@ public class TreeNode {
         return "当前节点位置：" + data;
     }
 
+
+    /**
+     * 返回 以该结点为根结点的树的高度
+     */
+    public int height() {
+        return Math.max(left == null ? 0 : left.height(), right == null ? 0 : right.height()) + 1;
+    }
 
 }

@@ -17,6 +17,29 @@ public class BstTree {
      */
     private TreeNode treeNode;
 
+
+    /**
+     * 返回左子树的高度
+     */
+    public int leftHeight() {
+        if (null == this.treeNode && null == this.treeNode.getLeft()) {
+            return 0;
+        }
+        return this.treeNode.getLeft().height();
+    }
+
+
+    /**
+     * 返回右子树的高度
+     */
+    public int rightHeight() {
+        if (null == this.treeNode && null == this.treeNode.getRight()) {
+            return 0;
+        }
+        return this.treeNode.getRight().height();
+    }
+
+
     /**
      * 后序遍历----循环
      */

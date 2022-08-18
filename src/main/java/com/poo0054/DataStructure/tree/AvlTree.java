@@ -1,7 +1,7 @@
 package com.poo0054.DataStructure.tree;
 
 /**
- * 二叉查找树 - bst树
+ * 平衡二叉查找树 - val树
  *
  * @author ZhangZhi
  * @version 1.0
