@@ -12,7 +12,14 @@ public class AvlTree extends BstTree {
     @Override
     public boolean insertNodeTree(int key) {
         if (super.insertNodeTree(key)) {
-            //TODO 需要旋转
+            //左边比右边高  右旋
+            if (leftHeight() - rightHeight() > 1) {
+                //右旋
+                rightRevolve();
+            } else {
+                //左旋
+                leftRevolve();
+            }
             return true;
         }
         return false;
@@ -21,10 +28,38 @@ public class AvlTree extends BstTree {
     @Override
     public boolean deleteNodeTree(int key) {
         if (super.deleteNodeTree(key)) {
+            //左边比右边高  右旋
+            if (leftHeight() - rightHeight() > 1) {
+                //右旋
+                rightRevolve();
+            } else {
+                //左旋
+                leftRevolve();
+
+            }
             return true;
-            //TODO 需要旋转
         }
         return false;
     }
 
+    /**
+     * 左旋
+     */
+    protected void leftRevolve() {
+
+    }
+
+    /**
+     * 右旋
+     */
+    protected void rightRevolve() {
+        TreeNode treeNode = getTreeNode();
+        //取出源根节点所有右节点
+        TreeNode left = treeNode.getLeft();
+        //TODO 右旋
+
+    }
+
 }
+
+

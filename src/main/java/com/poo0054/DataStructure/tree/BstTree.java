@@ -17,13 +17,30 @@ public class BstTree {
      */
     private TreeNode treeNode;
 
+    protected TreeNode getTreeNode() {
+        return treeNode;
+    }
+
+    /**
+     * 返回指定树的高度
+     */
+    public int height(TreeNode treeNode) {
+        TreeNode node = treeNode;
+        if (null == node) {
+            return 0;
+        }
+        return node.height();
+    }
 
     /**
      * 返回左子树的高度
      */
     public int leftHeight() {
-        if (null == this.treeNode && null == this.treeNode.getLeft()) {
+        if (null == this.treeNode) {
             return 0;
+        }
+        if (null == this.treeNode.getLeft()) {
+            return 1;
         }
         return this.treeNode.getLeft().height();
     }
@@ -33,8 +50,11 @@ public class BstTree {
      * 返回右子树的高度
      */
     public int rightHeight() {
-        if (null == this.treeNode && null == this.treeNode.getRight()) {
+        if (null == this.treeNode) {
             return 0;
+        }
+        if (null == this.treeNode.getRight()) {
+            return 1;
         }
         return this.treeNode.getRight().height();
     }
@@ -99,7 +119,6 @@ public class BstTree {
             postorderPrint(currentNode.getRight());
             //输出当前节点
             System.out.printf("%s \t", currentNode);
-
         }
     }
 
@@ -108,9 +127,7 @@ public class BstTree {
      */
     public void whileInorderTraversal(BstTree bstTree) {
         System.out.printf("中序遍历（循环）：");
-
         TreeNode currentNode = bstTree.treeNode;
-
         Stack<TreeNode> nodeStack = new Stack<>();
         while (null != currentNode || !nodeStack.isEmpty()) {
             //先输出左边 然后中间 最后右边
@@ -251,37 +268,37 @@ public class BstTree {
     public boolean insertNodeTree(int key) {
         TreeNode insertData = new TreeNode(key);
         //当前操作的节点
-        TreeNode root = this.treeNode;
+        TreeNode currentNode = this.treeNode;
         //root节点不存在
-        if (null == root) {
+        if (null == currentNode) {
             this.treeNode = insertData;
             return true;
         }
         //root节点存在
         while (true) {
             //相同的值插入失败
-            if (key == root.getData()) {
+            if (key == currentNode.getData()) {
                 return false;
             }
-            if (key < root.getData()) {
+
+            if (key < currentNode.getData()) {
                 //左边
-                TreeNode leftNode = root.getLeft();
+                TreeNode leftNode = currentNode.getLeft();
                 if (null == leftNode) {
                     //右边不存在 新增
-                    root.setLeft(insertData);
+                    currentNode.setLeft(insertData);
                     return true;
                 }
-                root = leftNode;
+                currentNode = leftNode;
             } else {
                 //右边
-                TreeNode rightNode = root.getRight();
+                TreeNode rightNode = currentNode.getRight();
                 if (null == rightNode) {
                     //右边不存在 新增
-                    root.setRight(insertData);
+                    currentNode.setRight(insertData);
                     return true;
                 }
-                root = rightNode;
-
+                currentNode = rightNode;
             }
         }
     }
@@ -295,17 +312,16 @@ public class BstTree {
     public boolean deleteNodeTree(int key) {
         //当前操作的元素
         TreeNode currentNode = this.treeNode;
-        //上个节点
+        //父个节点
         TreeNode parentNode = null;
         if (null == currentNode) {
             return false;
         }
-
         //0表示左边 1表示右边
         int direction = 0;
         while (null != currentNode) {
-            //如果删除的元素是自己
             int data = currentNode.getData();
+            //如果删除的元素是自己
             if (key == data) {
                 //删除逻辑
                 //只有一个节点或者没有节点
@@ -323,6 +339,7 @@ public class BstTree {
                 changeNode.setRight(currentNode.getRight());
                 return doChangeNode(parentNode, direction, changeNode);
             }
+            //父节点
             parentNode = currentNode;
             if (key > data) {
                 //右边
@@ -338,20 +355,15 @@ public class BstTree {
     }
 
 
-    private TreeNode getPretreatmentNode(TreeNode node) {
-        //当前处理的节点
-        TreeNode CurrentNode = node.getRight();
-        while (null != CurrentNode.getLeft()) {
-            CurrentNode = CurrentNode.getLeft();
+    private TreeNode getPretreatmentNode(TreeNode currentNode) {
+        //需要处理的节点
+        TreeNode changeNode = currentNode.getRight();
+        while (null != changeNode.getLeft()) {
+            changeNode = changeNode.getLeft();
         }
-        //找到该节点 并删除
-        if (deleteNodeTree(CurrentNode.getData())) {
-            CurrentNode.setRight(null);
-            CurrentNode.setLeft(null);
-            return CurrentNode;
-        }
-
-        return null;
+        //删除节点
+        deleteNodeTree(changeNode.getData());
+        return changeNode;
     }
 
     private boolean partChangeNode(TreeNode CurrentNode, TreeNode parentNode, int direction) {
