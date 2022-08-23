@@ -26,7 +26,27 @@ public class TreeNode {
      * 返回 以该结点为根结点的树的高度
      */
     public int height() {
-        return Math.max(null == left ? 0 : left.height(), null == right ? 0 : right.height()) + 1;
+        return Math.max(null == left ? 1 : left.height(), null == right ? 1 : right.height()) + 1;
+    }
+
+    /**
+     * 返回左子树的高度
+     */
+    public int leftHeight() {
+        if (null == left) {
+            return 1;
+        }
+        return left.height();
+    }
+
+    /**
+     * 返回右子树的高度
+     */
+    public int rightHeight() {
+        if (null == right) {
+            return 1;
+        }
+        return right.height();
     }
 
 }

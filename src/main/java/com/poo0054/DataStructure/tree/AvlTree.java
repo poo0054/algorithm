@@ -12,32 +12,51 @@ public class AvlTree extends BstTree {
     @Override
     public boolean insertNodeTree(int key) {
         if (super.insertNodeTree(key)) {
-            //左边比右边高  右旋
-            if (leftHeight() - rightHeight() > 1) {
-                //右旋
-                rightRevolve();
-            } else {
-                //左旋
-                leftRevolve();
-            }
-            return true;
+            return balance();
         }
         return false;
+    }
+
+    private boolean balance() {
+        TreeNode node = this.getTreeNode();
+        //左边比右边高
+        if (leftHeight() - rightHeight() > 1) {
+            //问题在左子数的左边还是右边
+            TreeNode left = node.getLeft();
+            if (left.leftHeight() - left.rightHeight() >= 0) {
+                //问题出在左节点的左边 ll
+                //右旋
+//                rightRevolve(this.getTreeNode());
+            } else {
+                //问题出在左节点的右边  -- lr  先左旋
+                //先把左节点左旋
+                node.setLeft(leftRevolve(left));
+            }
+            node = rightRevolve(node);
+        }
+
+        if (rightHeight() - leftHeight() > 1) {
+            //右边比左边高
+            //问题在左子数的左边还是右边
+            TreeNode right = node.getRight();
+            if (right.rightHeight() - right.leftHeight() >= 0) {
+                //问题在右节点的右边 -- rr
+//                leftRevolve(this.getTreeNode());
+            } else {
+                //问题出在右节点的左边  -- rl 先右旋
+                node.setRight(rightRevolve(right));
+            }
+            //左旋
+            node = leftRevolve(node);
+        }
+        super.setTreeNode(node);
+        return true;
     }
 
     @Override
     public boolean deleteNodeTree(int key) {
         if (super.deleteNodeTree(key)) {
-            //左边比右边高  右旋
-            if (leftHeight() - rightHeight() > 1) {
-                //右旋
-                rightRevolve();
-            } else {
-                //左旋
-                leftRevolve();
-
-            }
-            return true;
+            return balance();
         }
         return false;
     }
@@ -45,19 +64,26 @@ public class AvlTree extends BstTree {
     /**
      * 左旋
      */
-    protected void leftRevolve() {
-
+    protected TreeNode leftRevolve(TreeNode treeNode) {
+        System.out.println(treeNode + "===开始左旋");
+        //根节点
+        TreeNode right = treeNode.getRight();
+        treeNode.setRight(right.getLeft());
+        right.setLeft(treeNode);
+        return right;
     }
 
     /**
      * 右旋
      */
-    protected void rightRevolve() {
-        TreeNode treeNode = getTreeNode();
-        //取出源根节点所有右节点
+    protected TreeNode rightRevolve(TreeNode treeNode) {
+        System.out.println(treeNode + "===开始右旋");
+        //使用当前节点做主节点
         TreeNode left = treeNode.getLeft();
-        //TODO 右旋
-
+        treeNode.setLeft(left.getRight());
+        //  设置为当前根节点的右节点
+        left.setRight(treeNode);
+        return left;
     }
 
 }

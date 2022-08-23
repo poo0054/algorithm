@@ -21,6 +21,10 @@ public class BstTree {
         return treeNode;
     }
 
+    protected void setTreeNode(TreeNode treeNode) {
+        this.treeNode = treeNode;
+    }
+
     /**
      * 返回指定树的高度
      */

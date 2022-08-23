@@ -26,13 +26,11 @@ public class TreeTest {
         bstTree.whileInorderTraversal(bstTree);
         bstTree.postorderTraversal(bstTree);
         bstTree.whilePostorderTraversal(bstTree);
-
     }
 
     @Test
     public void avlTreeTest() {
-        init();
-        avlTree.insertNodeTree(1);
+        System.out.println(avlTree);
     }
 
 
@@ -61,6 +59,14 @@ public class TreeTest {
         bstTree.insertNodeTree(60);
         bstTree.insertNodeTree(70);
 
+        avlTree.insertNodeTree(20);
+        avlTree.insertNodeTree(70);
+        avlTree.insertNodeTree(84);
+        avlTree.insertNodeTree(46);
+        avlTree.insertNodeTree(38);
+        avlTree.insertNodeTree(50);
+        avlTree.insertNodeTree(55);
+        avlTree.insertNodeTree(60);
     }
 
     public void init() {
