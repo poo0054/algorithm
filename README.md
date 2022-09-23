@@ -66,8 +66,7 @@ algorithm 算法
     1. 执行用时：12 ms, 在所有 Java 提交中击败了68.11%的用户
     2. 内存消耗：49.9 MB, 在所有 Java 提交中击败了88.90%的用户
 
-![img.png](img/img.png)
+![排序算法原理](img/img_1.png)
 
-![img_1.png](img/img_1.png)
-
+![排序算法时间复杂度](img/img.png)
 
