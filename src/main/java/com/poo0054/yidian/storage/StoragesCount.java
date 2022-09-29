@@ -70,11 +70,11 @@ public class StoragesCount {
     public static void count(LocalDate start, LocalDate end, List<OmsQuoteFeeStorage> feeStorages) {
         //根据开始时间进行排序
         if (ObjectUtil.isEmpty(feeStorages)) {
-            System.out.println("计算参数不能为空");
+            throw new IllegalArgumentException("计算参数不能为空");
         }
 
-        if (ObjectUtil.isAllNotEmpty(start, end)) {
-            System.out.println("开始时间和结束时间不能为空");
+        if (ObjectUtil.hasEmpty(start, end)) {
+            throw new IllegalArgumentException("开始时间和结束时间不能为空");
         }
         feeStorages = feeStorages.stream().sorted(Comparator.comparing(OmsQuoteFeeStorage::getBeginDays)).collect(Collectors.toList());
         feeStorages.get(0).setBeginDays(feeStorages.get(0).getBeginDays() - 1);
