@@ -236,7 +236,8 @@ public class StoragesCount {
      * @param peakPrice      附加费用单价
      */
     private static void sout(LocalDate stageStart, LocalDate endDate, BigDecimal stageMoney, BigDecimal stagePeakMoney, BigDecimal money, BigDecimal peakPrice) {
-        System.out.printf("当前从%s到%s，标准费用：%s,附加费：%s 总共：%s ,单价：%s/一天  ， 附加费：%s/天 \n", stageStart, endDate, stageMoney, stagePeakMoney, stageMoney.add(stagePeakMoney), money, peakPrice);
+        System.out.printf("%s - %s \t 标准费用：%s \t 附加费：%s \t 总计：%s \t 单价：%s/一天 \t 附加费：%s/天 \n",
+                stageStart, endDate, stageMoney, stagePeakMoney, stageMoney.add(stagePeakMoney), money, peakPrice);
     }
 
 }
