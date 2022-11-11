@@ -41,7 +41,7 @@ import java.util.Set;
  * @version 1.0
  * @date 2022/11/10 15:43
  */
-public class 无重复字符的最长子串 {
+public class 无重复字符的最长子串3 {
 
     @Test
     public void test() {

@@ -30,7 +30,7 @@ package com.poo0054.力扣;
  * @version 1.0
  * @date 2022/11/10 10:37
  */
-public class 俩数相加 {
+public class 俩数相加2 {
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         int sum = l1.val + l2.val;

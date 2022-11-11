@@ -37,7 +37,7 @@ import java.util.Map;
  * @version 1.0
  * @date 2022/11/10 10:03
  */
-public class 俩数之和 {
+public class 俩数之和1 {
 
     @Test
     public void test() {
