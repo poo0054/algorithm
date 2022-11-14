@@ -1,4 +1,4 @@
-package com.poo0054.力扣;
+package com.poo0054.力扣.题目1_10;
 
 import org.junit.Test;
 
