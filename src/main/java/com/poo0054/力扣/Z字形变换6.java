@@ -2,7 +2,10 @@ package com.poo0054.力扣;
 
 import org.junit.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * 将一个给定字符串 s 根据给定的行数 numRows ，以从上往下、从左到右进行 Z 字形排列。
@@ -50,49 +53,58 @@ public class Z字形变换6 {
 
     @Test
     public void test() {
-        System.out.println(convert("0123456789abcde", 3));
+        System.out.println(convert("abc", 2));
     }
 
+    /**
+     * 行 * 排数（offset） = 当前行的下标
+     * X+netX =当前加上下一个的下标
+     */
     public String convert(String s, int numRows) {
         StringBuffer buffer = new StringBuffer();
         if (1 == numRows) {
             return s;
         }
-        List<Stack<Character>> list = new LinkedList<>();
         int length = s.length();
         //用来记录使用过的下标
         Set<Integer> set = new HashSet<>();
+        List<Integer> list = new ArrayList<>();
         //一个轮回
-        int offset = numRows + Math.max(numRows - 2, 1);
+        int offset = numRows + Math.max(numRows - 2, 0);
         for (int i = 0; i < numRows; i++) {
             //第几列
             int row = 0;
             //当前下标
-            int cuntIndex = row;
+            int cuntIndex = i;
             while (cuntIndex < length) {
-                //当前行
-                int cunt = offset * row;
-                //前一行
-                int lodCunt = Math.max(offset * (row - 1), 0);
-                //当前俩行的总数
-                int sum = cunt + lodCunt;
-                //下一个的下标
-                int netIndex = sum - cuntIndex;
-                if (cuntIndex < length) {
+                if ((0 == i) || (i == (numRows - 1))) {
+                    //第一行和最后一行做特殊处理
                     if (!set.contains(cuntIndex)) {
                         buffer.append(s.charAt(cuntIndex));
                         set.add(cuntIndex);
                     }
-                }
-                if (netIndex < length) {
-                    if (!set.contains(netIndex)) {
-                        buffer.append(s.charAt(netIndex));
-                        set.add(netIndex);
+                    list.add(cuntIndex);
+                    cuntIndex += offset;
+                } else {
+                    if (list.size() <= row + 1) {
+                        list.add(list.get(row) + offset);
                     }
+                    //当前下标的标准值
+                    int index = list.get(row) + list.get(Math.max(row + 1, 0));
+                    int netIndex = Math.max(index - cuntIndex, 0);
+                    if (!set.contains(cuntIndex)) {
+                        buffer.append(s.charAt(cuntIndex));
+                        set.add(cuntIndex);
+                    }
+                    if (netIndex < length) {
+                        if (!set.contains(netIndex)) {
+                            buffer.append(s.charAt(netIndex));
+                            set.add(netIndex);
+                        }
+                    }
+                    row++;
+                    cuntIndex = list.get(row) + i;
                 }
-                //方便计算下一次
-                row++;
-                cuntIndex += offset;
             }
         }
         return buffer.toString();
