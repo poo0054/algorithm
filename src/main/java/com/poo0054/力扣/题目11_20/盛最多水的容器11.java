@@ -1,4 +1,4 @@
-package com.poo0054.力扣.题目10_20;
+package com.poo0054.力扣.题目11_20;
 
 import org.junit.Test;
 
@@ -32,7 +32,7 @@ import org.junit.Test;
  * @version 1.0
  * @date 2022/11/15 9:16
  */
-public class 盛最多水的容器10 {
+public class 盛最多水的容器11 {
 
     @Test
     public void test() {
